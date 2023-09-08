@@ -28,6 +28,13 @@ class _AddScreenState extends State<AddScreen> {
       this.image = imageTemoparary;
     });
   }
+  void showSnackBar(BuildContext context) {
+    final snackBar = SnackBar(
+      backgroundColor: Colors.teal,
+      content: Text('Please Select Image First'),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 
   Future<void> _dialogBuilder(BuildContext context) {
     return showDialog<void>(
@@ -45,6 +52,9 @@ class _AddScreenState extends State<AddScreen> {
                       child: const Text('Heart'),
                       onPressed: () {
                         setState(() {
+                          if(image==null){
+                            showSnackBar(context);
+                          }
                           frame = 1;
                           isFrame = true;
                         });
@@ -54,6 +64,10 @@ class _AddScreenState extends State<AddScreen> {
                       child: const Text('Square'),
                       onPressed: () {
                         setState(() {
+                          if(image==null){
+                            showSnackBar(context);
+                            return;
+                          }
                           frame = 2;
                           isFrame = true;
                         });
@@ -63,6 +77,10 @@ class _AddScreenState extends State<AddScreen> {
                       child: const Text('Circle'),
                       onPressed: () {
                         setState(() {
+                          if(image==null){
+                            showSnackBar(context);
+                            return;
+                          }
                           frame = 3;
                           isFrame = true;
                         });
@@ -72,6 +90,10 @@ class _AddScreenState extends State<AddScreen> {
                       child: const Text('Rectangle'),
                       onPressed: () {
                         setState(() {
+                          if(image==null){
+                            showSnackBar(context);
+                            return;
+                          }
                           frame = 4;
                           isFrame = true;
                         });
@@ -85,6 +107,10 @@ class _AddScreenState extends State<AddScreen> {
                     ElevatedButton(
                         onPressed: () {
                           setState(() {
+                            if(image==null){
+                              showSnackBar(context);
+                              return;
+                            }
                             isFrame=false;
                           });
                         },
@@ -134,7 +160,6 @@ class _AddScreenState extends State<AddScreen> {
                   Image.file(
                     image!,
                     height: 400,
-                    // width: double.infinity,
                   ),
                   if (isFrame == true)
                     Image.asset(
